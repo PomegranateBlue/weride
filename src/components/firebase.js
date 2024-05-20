@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
-
+import { getFirestore } from "firebase/firestore";
+import firebase from "firebase/app";
 const firebaseConfig = {
   apiKey: "AIzaSyAQwPECRPL8Hl5plN55XX8rfNUCBjj_tAY",
   authDomain: "taxischedule-33477.firebaseapp.com",
@@ -12,4 +13,8 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const db = getDatabase(app);
+
+const firestoreDB = getFirestore(app);
+const realTimeDB = getDatabase(app);
+
+export { firestoreDB, realTimeDB };
