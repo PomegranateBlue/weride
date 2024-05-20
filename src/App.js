@@ -1,50 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
-import { ref, set } from "firebase/database";
-import { uid } from "uid";
-import { db } from "./firebase";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
+import RealTime from "./components/RealTime";
+import Profile from "./components/Profile";
+import DateTime from "./components/DayTime";
+
 const App = () => {
-  const [todo, setTodo] = useState("");
-
-  const handleTodo = (e) => {
-    setTodo(e.target.value);
-  };
-
-  const writeData = () => {
-    const uuid = uid();
-
-    set(ref(db, "test/" + uuid), {
-      todo,
-      uuid,
-    });
-    setTodo("");
-  };
-
   return (
-    <div className="container">
-      <div className="NavBar-container">
-        <div id="Nav">Navbar</div>
+    <Router>
+      <div className="pageNav">
+        <Link to="/Profile">사용자 정보</Link>
+        <Link to="/RealTime">실시간 합승</Link>
+        <Link to="/DateTime">일자별 합승</Link>
       </div>
-      <div className="logo-container">
-        <div id="logo">WERIDE</div>
-      </div>
-      <div className="introduce-container">
-        <p>
-          택시 합승을 위한 스케줄링 서비스입니다.
-          <br />
-          <br />
-          오른쪽 메뉴에서 실시간 합승자 모집과 일자별 모집을 통해
-          <br />
-          <br />
-          택시 합승 일정을 잡아보세요
-        </p>
-      </div>
-      <div className="info">footer</div>
-      <div className="firebaseTest">
-        <input type="text" value={todo} onChange={handleTodo}></input>
-        <button onClick={writeData}>Submit</button>
-      </div>
-    </div>
+      <Routes>
+        <Route path="/Profile" element={<Profile />} />
+        <Route path="/RealTime" element={<RealTime />} />
+        <Route path="/DateTime" element={<DateTime />} />
+      </Routes>
+    </Router>
   );
 };
 

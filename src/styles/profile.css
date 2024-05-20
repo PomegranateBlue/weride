@@ -1,0 +1,70 @@
+body {
+    background-color: dodgerblue;
+  }
+  
+  .serviceTitle {
+    font-size: 48px;
+  }
+  
+  .loginPage {
+    position: absloute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+  }
+  
+  .Container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 75%;
+    max-width: 500px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    padding-left: 15px;
+    position: relative;
+    top: 50px;
+  }
+  
+  .notice {
+    font-weight: 600;
+    margin-top: 30px;
+  }
+  
+  .emailForm input {
+    font-size: 15px;
+    border: none;
+    border-bottom: solid 1px cornflowerblue;
+    width: 60%;
+    height: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .passwdForm input {
+    font-size: 15px;
+    border: none;
+    border-bottom: solid 1px cornflowerblue;
+    width: 60%;
+    height: 30px;
+    margin-bottom: 15px;
+  }
+  
+  .BtnContainer {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .submitBtn {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 10px;
+  }
+  
+  .AuthBtn {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  
