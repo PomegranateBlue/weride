@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { firestoreDB } from "./firebase";
+import { firestoreDB } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 
 function TestFB() {

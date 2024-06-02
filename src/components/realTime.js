@@ -1,12 +1,18 @@
 import React, { useState } from "react";
-import { ref, set } from "firebase/database";
-import { uid } from "uid";
-import { db } from "./firebase";
+import { firestoreDB } from "../firebase";
+import { collection, addDocs, serverTimestamp } from "firebase/firestore";
 
 const RealTime = () => {
+  const [dataForm, setDataForm] = useState({
+    groupSize: "",
+    destination: "",
+    time: "",
+  });
+
   return (
     <div className="firebaseTest">
       <p>This page is for RealTime</p>
+      <form></form>
     </div>
   );
 };
