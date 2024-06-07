@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { firestoreDB } from "../firebase";
-import { collection, addDocs, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
-const RealTime = () => {
+const RealTimeComponent = () => {
   const [dataForm, setDataForm] = useState({
     groupSize: "",
     destination: "",
@@ -17,4 +17,4 @@ const RealTime = () => {
   );
 };
 
-export default RealTime;
+export default RealTimeComponent;

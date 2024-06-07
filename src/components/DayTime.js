@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const DayTime = () => {
+const DayTimeComponent = () => {
   const [selectDate, setSelectDate] = useState(null);
   const [time, setTime] = useState("");
   const [destination, setDestination] = useState("A");
@@ -72,4 +72,4 @@ const DayTime = () => {
   );
 };
 
-export default DayTime;
+export default DayTimeComponent;

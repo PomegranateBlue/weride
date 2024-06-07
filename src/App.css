@@ -1,3 +1,8 @@
 body {
   background-color: dodgerblue;
 }
+
+.pageNav {
+  display: flex;
+  gap: 20px;
+}
