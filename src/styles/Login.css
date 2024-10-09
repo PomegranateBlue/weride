@@ -1,0 +1,12 @@
+#title {
+  font-size: 64px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#welcome_line {
+  font-size: 22px;
+  text-align: center;
+  margin-top: 15px;
+  line-height: 1.5;
+}
