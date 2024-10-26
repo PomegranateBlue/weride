@@ -8,6 +8,7 @@
   font-size: 18px;
   text-align: center;
   margin-top: 15px;
+  margin-bottom: 15px;
   line-height: 1.5;
 }
 
@@ -23,7 +24,7 @@
   align-items: center;
   padding: 10px 10px;
   background-color: white;
-  height: 400px;
+  height: 440px;
   max-width: 400px;
   width: 100%;
   border-radius: 20px;
@@ -67,14 +68,13 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-top: 28px;
 }
-
-
 
 #signInBtn {
   width: 100%;
   max-width: 200px;
-  margin-top: 30px;
+  margin-top: 2px;
   padding: 16px;
   border-radius: 20px;
   border: 1px solid white;
@@ -83,4 +83,13 @@
   font-weight: bold;
   transition: background-color 0.2s ease, transform 0.2s ease;
   color: white;
+}
+
+#signInBtn:hover {
+  background-color: #0056b3;
+}
+
+.signInInfo {
+  font-size: 16px;
+  font-style: italic;
 }

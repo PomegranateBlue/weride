@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { auth, realTimeDB } from "../firebase.js";
-import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
-import { ref, set } from "firebase/database";
+//import { auth, realTimeDB } from "../firebase.js";
+//import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+//import { ref, set } from "firebase/database";
 //import { v4 as uuidv4 } from "uuid";
 //import Button from "@mui/material/Button";
 import "../styles/Login.css";
 import { useForm } from "react-hook-form";
+import SignUpModal from "./SignUpModal";
 
 const LoginComponent = () => {
   //const { register, handleSubmit } = useForm();
@@ -13,9 +14,20 @@ const LoginComponent = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [isModalOpen, setModalOpen] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(email, password);
+  };
+
+  const handleSignUpClick = () => {
+    console.log("회원가입 버튼");
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
   };
   return (
     <div>
@@ -36,8 +48,10 @@ const LoginComponent = () => {
           ></input>
           <button id="loginBtn">로그인</button>
           <div className="signInInfo">
-            <label>회원등록 후 이용가능합니다</label>
-            <button id="signInBtn">회원가입</button>
+            <div className="signInfo">회원등록 후 이용가능합니다</div>
+            <button id="signInBtn" onClick={handleSignUpClick}>
+              회원가입
+            </button>
           </div>
         </div>
       </div>
