@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import { useNavigate } from "react-router-dom";
 //import { ref, set } from "firebase/database";
 //import { v4 as uuidv4 } from "uuid";
 //import Button from "@mui/material/Button";
@@ -9,11 +10,11 @@ import SignUpModal from "./SignUpModal";
 
 const LoginComponent = () => {
   const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
+  //const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
-
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
@@ -25,6 +26,7 @@ const LoginComponent = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       console.log("Login success");
+      navigate("../profile");
       setEmail("");
       setPassword("");
     } catch (error) {
