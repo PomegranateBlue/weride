@@ -1,70 +1,45 @@
 body {
-    background-color: dodgerblue;
-  }
-  
-  .serviceTitle {
-    font-size: 48px;
-  }
-  
-  .loginPage {
-    position: absloute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
-  }
-  
-  .Container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 75%;
-    max-width: 500px;
-    background-color: whitesmoke;
-    border-radius: 10px;
-    padding-left: 15px;
-    position: relative;
-    top: 50px;
-  }
-  
-  .notice {
-    font-weight: 600;
-    margin-top: 30px;
-  }
-  
-  .emailForm input {
-    font-size: 15px;
-    border: none;
-    border-bottom: solid 1px cornflowerblue;
-    width: 60%;
-    height: 30px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-  }
-  
-  .passwdForm input {
-    font-size: 15px;
-    border: none;
-    border-bottom: solid 1px cornflowerblue;
-    width: 60%;
-    height: 30px;
-    margin-bottom: 15px;
-  }
-  
-  .BtnContainer {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .submitBtn {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    margin-right: 10px;
-  }
-  
-  .AuthBtn {
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
-  
+  background-color: dodgerblue;
+}
+
+.profile-title {
+  font-size: 48px;
+  text-align: center;
+}
+
+.profile-info {
+  font-size: 16px;
+  text-align: center;
+}
+
+.profile-menu-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+  width: 100%;
+  max-height: 600px;
+  height: 100%;
+  background-color: white;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+
+.profile-menu-container button {
+  width: 100%;
+  max-width: 300px;
+  padding: 15px;
+  margin: 10px 0;
+  font-size: 18px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.profile-menu-container button:hover {
+  background-color: #0056b3;
+}
