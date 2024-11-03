@@ -43,3 +43,9 @@ body {
 .profile-menu-container button:hover {
   background-color: #0056b3;
 }
+
+.user-uid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

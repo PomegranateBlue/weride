@@ -7,6 +7,9 @@ import {
   Navigate,
 } from "react-router-dom";
 
+//import Profile from "./components/Profile";
+import { AuthProvider } from "./components/AuthContext";
+
 import RealTimeComponent from "./components/RealTime";
 import LoginComponent from "./components/Login";
 import DateTimeComponent from "./components/DayTime";
@@ -18,17 +21,19 @@ const NotFound = () => {
 
 const App = () => {
   return (
-    <Router basename="/weride2">
-      <Routes>
-        <Route path="/" element={<Navigate to="/Login" />} />
-        <Route path="/Login" element={<LoginComponent />} />
-        <Route path="/SignUp" element={<UserAuthComponent />} />
-        <Route path="/realtime" element={<RealTimeComponent />} />
-        <Route path="/datetime" element={<DateTimeComponent />} />
-        <Route path="/profile" element={<ProfileComponent />} />
-        <Route path="/*" element={<NotFound />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router basename="/weride2">
+        <Routes>
+          <Route path="/" element={<Navigate to="/Login" />} />
+          <Route path="/Login" element={<LoginComponent />} />
+          <Route path="/SignUp" element={<UserAuthComponent />} />
+          <Route path="/realtime" element={<RealTimeComponent />} />
+          <Route path="/datetime" element={<DateTimeComponent />} />
+          <Route path="/profile" element={<ProfileComponent />} />
+          <Route path="/*" element={<NotFound />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 };
 export default App;

@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import "../styles/profile.css";
+import { useAuth } from "./AuthContext";
 const ProfileComponent = () => {
+  const { currentUser } = useAuth();
   return (
     <div>
       <p className="profile-title">사용자 전용 페이지</p>
@@ -9,6 +11,13 @@ const ProfileComponent = () => {
         <button>실시간 예약</button>
         <button>일자별 예약</button>
         <button>사용자 정보 수정</button>
+      </div>
+      <div className="user-uid">
+        {currentUser ? (
+          <p>현재 사용자 UID: {currentUser.uid}</p>
+        ) : (
+          <p>로그인 정보를 불러오는 중입니다...</p>
+        )}
       </div>
     </div>
   );

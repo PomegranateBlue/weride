@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 //import { ref, set } from "firebase/database";
 //import { v4 as uuidv4 } from "uuid";
 //import Button from "@mui/material/Button";
@@ -15,6 +16,8 @@ const LoginComponent = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
+  const { setCurrentUser } = useAuth();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
@@ -24,8 +27,13 @@ const LoginComponent = () => {
     //console.log(email, password);
     setErrorMessage("");
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       console.log("Login success");
+      setCurrentUser(userCredential.user);
       navigate("../profile");
       setEmail("");
       setPassword("");
