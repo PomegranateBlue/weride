@@ -1,0 +1,25 @@
+.componentTitle {
+  font-size: 46px;
+  display: flex;
+  justify-content: center;
+}
+
+.componentInfo {
+  display: flex;
+  justify-content: center;
+}
+
+.datePicker-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.custom-datePicker {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 6px;
+  padding: 10px 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
