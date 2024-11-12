@@ -1,12 +1,31 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import "../styles/reserveModal.css";
 const ReserveModal = ({ mode, selectDay, closeModal }) => {
   const [dataForm, setDataForm] = useState({
     time: "",
     destination: "",
-    passenger: 1,
+    passenger: 2,
   });
+  const [timeOption, setTimeOption] = useState([]);
+  useEffect(() => {
+    timeCustom();
+  }, []);
 
+  const timeCustom = () => {
+    const nowTime = new Date();
+    nowTime.setMinutes(nowTime.getMinutes() + 10);
+    nowTime.setSeconds(0);
+    nowTime.setMilliseconds(0);
+
+    const timeSetting = [];
+    for (let i = 0; i < 4; i++) {
+      const parseTime = new Date(nowTime);
+      parseTime.setMinutes(Math.ceil(parseTime.getMinutes() / 15) * 15);
+      timeSetting.push(new Date(parseTime));
+      nowTime.setMinutes(nowTime.getMinutes() + 15);
+    }
+    setTimeOption(timeSetting);
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDataForm((prevData) => ({ ...prevData, [name]: value }));
@@ -14,6 +33,7 @@ const ReserveModal = ({ mode, selectDay, closeModal }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     let reservationData = {
       ...dataForm,
       createdAt: new Date().toISOString(),
@@ -43,17 +63,28 @@ const ReserveModal = ({ mode, selectDay, closeModal }) => {
         )}
         <form onSubmit={handleSubmit}>
           <label>시간</label>
-          <input
-            type="time"
+          <select
             name="time"
             value={dataForm.time}
             onChange={handleChange}
-          />
+            className="time-table"
+          >
+            <option value="">시간을 선택하세요</option>
+            {timeOption.map((time, index) => (
+              <option key={index} value={time.toISOString()}>
+                {time.toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </option>
+            ))}
+          </select>
           <label>도착지</label>
           <select
             name="destination"
             value={dataForm.destination}
             onChange={handleChange}
+            className="destinationSelect"
           >
             <option value="">목적지를 선택하세요</option>
             <option value="대신관 앞">대신관 앞</option>
@@ -63,14 +94,21 @@ const ReserveModal = ({ mode, selectDay, closeModal }) => {
           <input
             type="number"
             name="passenger"
-            min="1"
+            min="2"
             max="4"
             value={dataForm.passenger}
             onChange={handleChange}
+            className="passengerNum"
           />
-          <button type="submit">예약</button>
+          <div className="modalBtn-container">
+            <button type="submit" className="reservBtn">
+              예약
+            </button>
+            <button onClick={closeModal} className="closeBtn">
+              닫기
+            </button>
+          </div>
         </form>
-        <button onClick={closeModal}>닫기</button>
       </div>
     </div>
   );

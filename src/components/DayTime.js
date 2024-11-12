@@ -14,6 +14,7 @@ const DayTimeComponent = () => {
       {value}
     </button>
   ));
+
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   return (
