@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/weride2/static/css/main.e2c0ffb5.css",
+    "main.js": "/weride2/static/js/main.cafb8c6c.js",
+    "static/js/453.033b8de2.chunk.js": "/weride2/static/js/453.033b8de2.chunk.js",
+    "index.html": "/weride2/index.html",
+    "main.e2c0ffb5.css.map": "/weride2/static/css/main.e2c0ffb5.css.map",
+    "main.cafb8c6c.js.map": "/weride2/static/js/main.cafb8c6c.js.map",
+    "453.033b8de2.chunk.js.map": "/weride2/static/js/453.033b8de2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e2c0ffb5.css",
+    "static/js/main.cafb8c6c.js"
+  ]
+}
