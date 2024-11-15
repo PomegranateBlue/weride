@@ -22,7 +22,7 @@ const NotFound = () => {
 const App = () => {
   return (
     <AuthProvider>
-      <Router basename="/weride2">
+      <Router basename="/weride">
         <Routes>
           <Route path="/" element={<Navigate to="/Login" />} />
           <Route path="/Login" element={<LoginComponent />} />
