@@ -1,17 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { firestoreDB } from "../firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  setDoc,
+  addDoc,
+  doc,
+  serverTimestamp,
+} from "firebase/firestore";
+import { useAuth } from "../components/AuthContext";
 import "../styles/realTime.css";
 const RealTimeComponent = () => {
+  const { currentUser } = useAuth();
   const [dataForm, setDataForm] = useState({
     groupSize: "2",
     destination: "",
     time: "",
   });
   const [timeOption, setTimeOption] = useState([]);
+  const [location, setLocation] = useState({ lat: null, lon: null });
+  //const [message, setMessage] = useState(null); // 데이터 확인용
 
   useEffect(() => {
     timeCustom();
+    userLocation();
   }, []);
 
   const timeCustom = () => {
@@ -30,6 +41,25 @@ const RealTimeComponent = () => {
     setTimeOption(timeSetting);
   };
 
+  const userLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          });
+          console.log("geolocation call success", position.coords);
+        },
+        (error) => {
+          console.error("geolocation call fail", error);
+        }
+      );
+    } else {
+      console.error("geolocation API error");
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDataForm((prevData) => ({
@@ -40,20 +70,29 @@ const RealTimeComponent = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      await addDoc(collection(firestoreDB, "RealTimeReservations"), {
+      const userRequestRef = doc(
+        firestoreDB,
+        "realTimeRequest",
+        currentUser.uid
+        //위와 같은 계층 유지하기
+      );
+
+      await setDoc(userRequestRef, {
         ...dataForm,
-        timestamp: serverTimestamp(),
+        uid: currentUser.uid,
+        location,
+        createdAt: serverTimestamp(),
       });
+
+      console.log("firestore save success");
       setDataForm({
-        groupSize: "",
+        groupSize: "2",
         destination: "",
         time: "",
       });
-      console.log("예약이 성공적으로 저장되었습니다!");
     } catch (error) {
-      console.error("예약 저장 중 오류 발생:", error);
+      console.error("firestore save error", error);
     }
   };
 
