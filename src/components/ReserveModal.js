@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "../styles/reserveModal.css";
-const ReserveModal = ({ mode, selectDay, closeModal }) => {
+
+const ReserveModal = ({ mode, selectDay, onSubmit, closeModal }) => {
   const [dataForm, setDataForm] = useState({
     time: "",
     destination: "",
-    passenger: 2,
+    groupSize: "2",
   });
+
   const [timeOption, setTimeOption] = useState([]);
+
   useEffect(() => {
-    timeCustom();
+    timeCustom(); // 예약 가능한 시간 옵션 생성
   }, []);
 
   const timeCustom = () => {
@@ -26,32 +29,24 @@ const ReserveModal = ({ mode, selectDay, closeModal }) => {
     }
     setTimeOption(timeSetting);
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setDataForm((prevData) => ({ ...prevData, [name]: value }));
+    setDataForm((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    let reservationData = {
+    const reservationData = {
       ...dataForm,
-      createdAt: new Date().toISOString(),
+      date: selectDay.toISOString(), // DatePicker에서 선택된 날짜를 date로 설정
     };
 
-    if (mode === "date") {
-      reservationData = {
-        ...reservationData,
-        date: selectDay.toISOString(),
-      };
-    }
-
-    console.log(
-      `${mode === "date" ? "일자별" : "실시간"} 예약 정보`,
-      reservationData
-    );
-
-    closeModal();
+    onSubmit(reservationData); // 부모 컴포넌트에 데이터 전달
   };
 
   return (
@@ -93,10 +88,10 @@ const ReserveModal = ({ mode, selectDay, closeModal }) => {
           <label>인원 수</label>
           <input
             type="number"
-            name="passenger"
+            name="groupSize"
             min="2"
             max="4"
-            value={dataForm.passenger}
+            value={dataForm.groupSize}
             onChange={handleChange}
             className="passengerNum"
           />

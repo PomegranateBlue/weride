@@ -1,154 +1,57 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { firestoreDB } from "../firebase";
-import {
-  collection,
-  setDoc,
-  addDoc,
-  doc,
-  serverTimestamp,
-} from "firebase/firestore";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { useAuth } from "../components/AuthContext";
-import "../styles/realTime.css";
+import ReserveModal from "./ReserveModal";
+import "../styles/dayTime.css";
+
 const RealTimeComponent = () => {
-  const { currentUser } = useAuth();
-  const [dataForm, setDataForm] = useState({
-    groupSize: "2",
-    destination: "",
-    time: "",
-  });
-  const [timeOption, setTimeOption] = useState([]);
-  const [location, setLocation] = useState({ lat: null, lon: null });
-  //const [message, setMessage] = useState(null); // 데이터 확인용
+  const { currentUser } = useAuth(); // 로그인한 사용자 정보
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
+  const [selectedDate, setSelectedDate] = useState(new Date()); // DatePicker로 선택한 날짜
 
-  useEffect(() => {
-    timeCustom();
-    userLocation();
-  }, []);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
-  const timeCustom = () => {
-    const nowTime = new Date();
-    nowTime.setMinutes(nowTime.getMinutes() + 10);
-    nowTime.setSeconds(0);
-    nowTime.setMilliseconds(0);
-
-    const timeSetting = [];
-    for (let i = 0; i < 4; i++) {
-      const parseTime = new Date(nowTime);
-      parseTime.setMinutes(Math.ceil(parseTime.getMinutes() / 15) * 15);
-      timeSetting.push(new Date(parseTime));
-      nowTime.setMinutes(nowTime.getMinutes() + 15);
-    }
-    setTimeOption(timeSetting);
-  };
-
-  const userLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLocation({
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-          });
-          console.log("geolocation call success", position.coords);
-        },
-        (error) => {
-          console.error("geolocation call fail", error);
-        }
-      );
-    } else {
-      console.error("geolocation API error");
-    }
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setDataForm((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (reservationData) => {
     try {
-      const userRequestRef = doc(
+      const userDocRef = doc(
         firestoreDB,
-        "realTimeRequest",
-        currentUser.uid
-        //위와 같은 계층 유지하기
+        "dayTimeRequest",
+        currentUser.uid // UID를 문서 이름으로 사용
       );
 
-      await setDoc(userRequestRef, {
-        ...dataForm,
+      await setDoc(userDocRef, {
+        ...reservationData,
+        date: selectedDate.toISOString(), // DatePicker에서 선택한 날짜
         uid: currentUser.uid,
-        location,
-        createdAt: serverTimestamp(),
+        createdAt: serverTimestamp(), // 서버 타임스탬프
       });
 
-      console.log("firestore save success");
-      setDataForm({
-        groupSize: "2",
-        destination: "",
-        time: "",
-      });
+      console.log("Daytime reservation saved successfully");
+      closeModal();
     } catch (error) {
-      console.error("firestore save error", error);
+      console.error("Error saving daytime reservation: ", error);
     }
   };
 
   return (
-    <div className="realtime-component">
-      <h1 className="realtimeTitle">실시간 예약</h1>
-      <h3 className="realtime-info">원하시는 조건을 설정해주세요</h3>
-      <div className="realtime-container">
-        <div className="realtime-content">
-          <form className="realtime-form" onSubmit={handleSubmit}>
-            <label>시간</label>
-            <select
-              name="time"
-              value={dataForm.time}
-              onChange={handleChange}
-              className="time-table"
-            >
-              <option value="">시간을 선택하세요</option>
-              {timeOption.map((time, index) => (
-                <option key={index} value={time.toISOString()}>
-                  {time.toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </option>
-              ))}
-            </select>
+    <div className="daytime-container">
+      <div className="daytime-content">
+        <h1 className="componentTitle">일자별 예약</h1>
+        <h2 className="componentInfo">원하는 예약 날짜와 조건을 설정하세요.</h2>
+        <button className="openModalBtn" onClick={openModal}>
+          예약하기
+        </button>
 
-            <label>도착지</label>
-            <select
-              name="destination"
-              value={dataForm.destination}
-              onChange={handleChange}
-              className="destinationSelect"
-            >
-              <option value="">목적지를 선택하세요</option>
-              <option value="대신관 앞">대신관 앞</option>
-              <option value="학교 운동장">학교 운동장</option>
-            </select>
-
-            <label>인원 수</label>
-            <input
-              type="number"
-              name="groupSize"
-              min="2"
-              max="4"
-              value={dataForm.groupSize}
-              onChange={handleChange}
-              className="passengerNum"
-            />
-
-            <button type="submit" className="realtime-reserveBtn">
-              예약
-            </button>
-          </form>
-        </div>
+        {isModalOpen && (
+          <ReserveModal
+            mode="date"
+            selectDay={selectedDate}
+            onSubmit={handleSubmit}
+            closeModal={closeModal}
+          />
+        )}
       </div>
     </div>
   );

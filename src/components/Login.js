@@ -3,16 +3,13 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
-//import { ref, set } from "firebase/database";
-//import { v4 as uuidv4 } from "uuid";
-//import Button from "@mui/material/Button";
 import "../styles/Login.css";
 import SignUpModal from "./SignUpModal";
 
 const LoginComponent = () => {
   const [email, setEmail] = useState("");
-  //const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
+
   const [errorMessage, setErrorMessage] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -32,7 +29,9 @@ const LoginComponent = () => {
         email,
         password
       );
+
       console.log("Login success");
+
       setCurrentUser(userCredential.user);
       navigate("../profile");
       setEmail("");

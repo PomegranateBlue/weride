@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -9,15 +8,25 @@ import {
 } from "react-router-dom";
 
 //import Profile from "./components/Profile";
-import { AuthProvider } from "./components/AuthContext";
+import { AuthProvider, useAuth } from "./components/AuthContext";
 
 import RealTimeComponent from "./components/RealTime";
 import LoginComponent from "./components/Login";
 import DateTimeComponent from "./components/DayTime";
 import ProfileComponent from "./components/Profile";
 import UserAuthComponent from "./components/UserAuth";
+import LogOutComponent from "./components/Logout";
 const NotFound = () => {
   return <h2>404:Page Not Found</h2>;
+};
+
+const HandleUserState = () => {
+  const { currentUser } = useAuth();
+  return currentUser ? (
+    <footer>
+      <LogOutComponent />
+    </footer>
+  ) : null;
 };
 
 const App = () => {
@@ -33,6 +42,7 @@ const App = () => {
           <Route path="/profile" element={<ProfileComponent />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
+        <HandleUserState />
       </Router>
     </AuthProvider>
   );
