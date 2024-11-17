@@ -29,7 +29,7 @@ const DayTimeComponent = () => {
 
       await setDoc(userDocRef, {
         ...reservationData,
-        date: modalSelectDay.toISOString(), // DatePicker로 선택한 날짜
+        date: modalSelectDay.toISOString(), 
         uid: currentUser.uid,
         createdAt: serverTimestamp(),
       });
@@ -52,7 +52,7 @@ const DayTimeComponent = () => {
             selected={startDate}
             onChange={(date) => {
               setStartDate(date);
-              setModalSelectDay(date); // DatePicker에서 선택한 날짜 설정
+              setModalSelectDay(date); 
               openModal();
             }}
             dateFormat="yyyy-MM-dd"
@@ -63,9 +63,9 @@ const DayTimeComponent = () => {
         {isModalOpen && (
           <ReserveModal
             mode="date"
-            selectDay={modalSelectDay} // 선택된 날짜 전달
-            onSubmit={handleSubmit} // 데이터를 Firestore에 전송
-            closeModal={closeModal} // 모달 닫기
+            selectDay={modalSelectDay} 
+            onSubmit={handleSubmit} 
+            closeModal={closeModal} 
           />
         )}
       </div>

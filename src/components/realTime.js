@@ -6,26 +6,22 @@ import ReserveModal from "./ReserveModal";
 import "../styles/dayTime.css";
 
 const RealTimeComponent = () => {
-  const { currentUser } = useAuth(); // 로그인한 사용자 정보
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
-  const [selectedDate, setSelectedDate] = useState(new Date()); // DatePicker로 선택한 날짜
+  const { currentUser } = useAuth();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   const handleSubmit = async (reservationData) => {
     try {
-      const userDocRef = doc(
-        firestoreDB,
-        "dayTimeRequest",
-        currentUser.uid // UID를 문서 이름으로 사용
-      );
+      const userDocRef = doc(firestoreDB, "dayTimeRequest", currentUser.uid);
 
       await setDoc(userDocRef, {
         ...reservationData,
-        date: selectedDate.toISOString(), // DatePicker에서 선택한 날짜
+        date: selectedDate.toISOString(),
         uid: currentUser.uid,
-        createdAt: serverTimestamp(), // 서버 타임스탬프
+        createdAt: serverTimestamp(),
       });
 
       console.log("Daytime reservation saved successfully");
