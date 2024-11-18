@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // realTimeRequest 컬렉션 하위에서 UID가 문서 이름인 경우
+    match /realTimeRequest/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // dayTimeRequest 컬렉션 하위에서 UID가 문서 이름인 경우
+    match /dayTimeRequest/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+
+
+
