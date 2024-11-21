@@ -25,12 +25,13 @@ const DayTimeComponent = () => {
 
   const handleSubmit = async (reservationData) => {
     try {
-      const userDocRef = doc(firestoreDB, "dayTimeRequest", currentUser.uid);
+      const userDocRef = doc(firestoreDB, "userRequest", currentUser.uid);
 
       await setDoc(userDocRef, {
         ...reservationData,
-        date: modalSelectDay.toISOString(), 
+        date: modalSelectDay.toISOString(),
         uid: currentUser.uid,
+        type: "2",
         createdAt: serverTimestamp(),
       });
 
@@ -52,7 +53,7 @@ const DayTimeComponent = () => {
             selected={startDate}
             onChange={(date) => {
               setStartDate(date);
-              setModalSelectDay(date); 
+              setModalSelectDay(date);
               openModal();
             }}
             dateFormat="yyyy-MM-dd"
@@ -63,9 +64,9 @@ const DayTimeComponent = () => {
         {isModalOpen && (
           <ReserveModal
             mode="date"
-            selectDay={modalSelectDay} 
-            onSubmit={handleSubmit} 
-            closeModal={closeModal} 
+            selectDay={modalSelectDay}
+            onSubmit={handleSubmit}
+            closeModal={closeModal}
           />
         )}
       </div>

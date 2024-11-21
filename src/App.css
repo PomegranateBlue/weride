@@ -6,3 +6,9 @@ body {
   display: flex;
   gap: 20px;
 }
+
+.after-login-component {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

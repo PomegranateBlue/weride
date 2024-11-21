@@ -1,0 +1,30 @@
+.navigator-container {
+  display: flex;
+  width: 100%;
+  top: 0px;
+  position: fixed;
+  height: 8%;
+}
+
+.navigator-content {
+  display: flex;
+  padding: 20px;
+
+  top: 180px;
+  width: 100%;
+  justify-content: space-evenly;
+  gap: 30px;
+  align-items: center;
+  background-color: #454d56;
+  color: white;
+  font-size: 16px;
+}
+
+.nav-link:hover {
+  color: #007bff;
+}
+
+.weride-name {
+  font-size: 22px;
+  font-family: "Krona One";
+}

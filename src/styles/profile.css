@@ -3,13 +3,18 @@ body {
 }
 
 .profile-title {
-  font-size: 48px;
+  font-size: 36px;
   text-align: center;
+  position: relative;
+  top: 50px;
 }
 
 .profile-info {
   font-size: 16px;
   text-align: center;
+  color: white;
+  position: relative;
+  top: 60px;
 }
 
 .profile-menu-container {
@@ -22,7 +27,7 @@ body {
   max-height: 600px;
   height: 100%;
   background-color: white;
-  margin: 0 auto;
+  margin: 80px auto;
   border-radius: 6px;
 }
 

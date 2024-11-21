@@ -67,17 +67,24 @@ const RealTimeComponent = () => {
     try {
       const userRequestRef = doc(
         firestoreDB,
-        "realTimeRequest",
+        "userRequest",
+
         currentUser.uid
-        //위와 같은 계층 유지하기
       );
 
-      await setDoc(userRequestRef, {
-        ...dataForm,
-        uid: currentUser.uid,
-        location,
-        createdAt: serverTimestamp(),
-      });
+      //위와 같은 계층 유지하기
+
+      await setDoc(
+        userRequestRef,
+        {
+          ...dataForm,
+          uid: currentUser.uid,
+          type: "1",
+          location,
+          createdAt: serverTimestamp(),
+        },
+        { merge: true }
+      );
 
       console.log("firestore save success");
       setDataForm({

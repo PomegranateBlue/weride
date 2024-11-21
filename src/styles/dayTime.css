@@ -1,18 +1,24 @@
 .componentTitle {
-  font-size: 46px;
+  font-size: 36px;
   display: flex;
   justify-content: center;
+
+  position: relative;
+  top: 50px;
 }
 
 .componentInfo {
   display: flex;
   justify-content: center;
+  position: relative;
+  top: 60px;
+  color: white;
 }
 
 .datePicker-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 30%;
 }
 
 .custom-datePicker {
