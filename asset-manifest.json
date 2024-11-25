@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/weride/static/css/main.e2c0ffb5.css",
-    "main.js": "/weride/static/js/main.c9bdcce9.js",
+    "main.css": "/weride/static/css/main.30535bd5.css",
+    "main.js": "/weride/static/js/main.5ee0e07c.js",
     "static/js/453.033b8de2.chunk.js": "/weride/static/js/453.033b8de2.chunk.js",
     "index.html": "/weride/index.html",
-    "main.e2c0ffb5.css.map": "/weride/static/css/main.e2c0ffb5.css.map",
-    "main.c9bdcce9.js.map": "/weride/static/js/main.c9bdcce9.js.map",
+    "main.30535bd5.css.map": "/weride/static/css/main.30535bd5.css.map",
+    "main.5ee0e07c.js.map": "/weride/static/js/main.5ee0e07c.js.map",
     "453.033b8de2.chunk.js.map": "/weride/static/js/453.033b8de2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e2c0ffb5.css",
-    "static/js/main.c9bdcce9.js"
+    "static/css/main.30535bd5.css",
+    "static/js/main.5ee0e07c.js"
   ]
 }
