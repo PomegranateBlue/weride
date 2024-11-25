@@ -37,20 +37,26 @@ const HandleUserState = () => {
   ) : null;
 };
 
+const AnimateRoute = () => {
+  const animelocation = useLocation();
+};
+
 const App = () => {
   return (
     <AuthProvider>
       <Router basename="/weride">
-        <Routes>
-          <Route path="/" element={<Navigate to="/Login" />} />
-          <Route path="/Login" element={<LoginComponent />} />
-          <Route path="/SignUp" element={<UserAuthComponent />} />
-          <Route path="/realtime" element={<RealTimeComponent />} />
-          <Route path="/datetime" element={<DateTimeComponent />} />
-          <Route path="/profile" element={<ProfileComponent />} />
-          <Route path="/reserve" element={<ReserveCheckComponent />} />
-          <Route path="/*" element={<NotFound />} />
-        </Routes>
+        <div className="fade-in">
+          <Routes>
+            <Route path="/" element={<Navigate to="/Login" />} />
+            <Route path="/Login" element={<LoginComponent />} />
+            <Route path="/SignUp" element={<UserAuthComponent />} />
+            <Route path="/realtime" element={<RealTimeComponent />} />
+            <Route path="/datetime" element={<DateTimeComponent />} />
+            <Route path="/profile" element={<ProfileComponent />} />
+            <Route path="/reserve" element={<ReserveCheckComponent />} />
+            <Route path="/*" element={<NotFound />} />
+          </Routes>
+        </div>
         <HandleUserState />
       </Router>
     </AuthProvider>
