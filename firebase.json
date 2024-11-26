@@ -9,6 +9,9 @@
       }
     ]
   },
+  "emulators": {
+    "firestore": { "port": 8000 }
+  },
   "functions": [
     {
       "source": "functions",

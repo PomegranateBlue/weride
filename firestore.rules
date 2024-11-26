@@ -1,4 +1,4 @@
-rules_version = '2';
+	 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     // realTimeRequest 컬렉션 하위에서 UID가 문서 이름인 경우
